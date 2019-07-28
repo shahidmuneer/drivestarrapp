@@ -1,10 +1,13 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createAppContainer,createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 
 import GalleryScreen from '../gallery/GalleryViewContainer';
+import AuthScreen from "../auth/AuthViewContainer";
+
+import LoginScreen from '../login/LoginViewContainer';
 
 // To use this screens please see the full version at https://reactnativestarter.com
 // import ProfileScreen from '../containers/ProfileScreen';
@@ -112,5 +115,16 @@ const stackNavigator = createStackNavigator(
     }),
   },
 );
+const AuthStack = createStackNavigator({ SignIn: LoginScreen });
 
-export default createAppContainer(stackNavigator);
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+  App: stackNavigator,
+  Auth:AuthStack,
+  AuthLoading: AuthScreen
+      },
+      {
+    initialRouteName: 'AuthLoading',
+      }
+      ));
