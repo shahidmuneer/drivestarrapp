@@ -106,6 +106,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {
         abi {
@@ -137,6 +138,13 @@ android {
 }
 
 dependencies {
+    // implementation project(':react-native-camera')
+    compile (project(':react-native-camera')) {
+  exclude group: "com.google.android.gms"
+        }
+compile ("com.google.android.gms:play-services-vision:10.2.0") {
+  force = true;
+}
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-localize')
     implementation project(':react-native-linear-gradient')

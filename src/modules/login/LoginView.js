@@ -1,12 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Button, TouchableOpacity,AsyncStorage } from 'react-native';
-import { Card,  Input } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Lightbox from 'react-native-lightbox';
-import {YellowBox} from 'react-native';
+import * as axios from "axios";
+import { StyleSheet, View,Text,Alert, Button,TouchableOpacity,AsyncStorage } from 'react-native';
+import { Card,  Input,Image } from 'react-native-elements'
 import { colors } from '../../styles';
-import { GridRow } from '../../components';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class SignInScreen extends React.Component {static navigationOptions =
    {
@@ -14,27 +11,55 @@ export default class SignInScreen extends React.Component {static navigationOpti
 };
 constructor(props){
   super(props);
-  this.state= {passwordInput:"",emailInput:""};
+  this.state= {passwordInput:"",emailInput:"",loading:false,error:""};
   this.handleEmailChange=this.handleEmailChange.bind(this);
   this.handlePasswordChange=this.handlePasswordChange.bind(this);
 }
 
 handleEmailChange(value){
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+  {
+    this.setState({
+      error:""
+    });
+  }
+  else if(value==""){
+    this.setState({
+      error:""
+    });
+  }
+  else{
+    this.setState({
+      error:" Invalid Email Address"
+    });
+  }
 this.state.emailInput=value;
 }
 
 
 handlePasswordChange(value){
   this.state.passwordInput=value;
-  console.log(value);
   }
 
 
 render() {
   return (
-    <View>
-      <Card title="Login Form"
-      containerStyle={{padding: 5,marginTop:10}}>
+    <View style={styles.container}>
+      <Spinner visible={this.state.loading} style={{color:"white"}}  
+      textContent={''}></Spinner>
+
+            <View style={{ width:"100%",marginTop:-120,justifyContent: 'center',
+    alignItems: 'center'}}>
+                <Image
+  source={require('../../../assets/images/icon2.png')}
+  style={{ width: 150, height: 150,resizeMode:'contain' }}
+  />
+  </View>
+  {/* title="Login Form" */}
+      <Card
+      containerStyle={{padding: 5,marginTop:10,width:"90%"}}>
+     
+        <Text style={{color:'red',paddingLeft:20}}>{this.state.error}</Text>
         <Input
          containerStyle={{marginTop:10}}
   leftIcon={{ type: 'font-awesome', name: 'user' }}
@@ -78,22 +103,48 @@ render() {
 }
 
 _signInAsync = async () => {
-  console.log(this.state);
-  await fetch('https://dsjkhanewal.com.pk/api/login?username=MyUserName&password=MyPassword&login_email='+this.state.emailInput+"&login_password="+this.state.passwordInput, {
-  method: 'GET'
-  // body: JSON.stringify({
-  //   login_email: this.state.emailInput,
-  //   login_password: this.state.passwordInput,
-  // }),
-}) 
-.then((response) => response.json())
-.then(function(responseJson){
-   AsyncStorage.setItem('userToken', 'abc');
-  this.props.navigation.navigate('App');
 
+//  let body =
+this.setState({
+  loading:true
+});
+let vm=this;
+//   await fetch('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login', {
+//   method: 'POST',
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json',
+//   },
+//   body:JSON.stringify({
+//     email: this.state.emailInput,
+//     password: this.state.passwordInput,
+//   })
+// }) 
+// .then((response) => response.json())
+// .then(function(responseJson){
+
+await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
+        email: this.state.emailInput,
+        password: this.state.passwordInput
+}).then(function(responseJson){
+  vm.setState({
+      loading:false
+    });
+ if(responseJson.status==200){
+   AsyncStorage.setItem('userToken', responseJson.token_type+" "+responseJson.access_token);
+  vm.props.navigation.navigate("App");
+ 
+
+}
+ else{
+  vm.setState({
+    loading:false
+  });
+  Alert.alert("Oops !","Email / Password is wrong");
+ }
 })
 .catch((error) => {
-  console.error(error);
+  console.error("error"+error);
 });
 
 
@@ -103,7 +154,15 @@ _signInAsync = async () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
+    flex: 1,
+    height: '100%',
+    left: 0,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   topImage: {
     flex: 1,

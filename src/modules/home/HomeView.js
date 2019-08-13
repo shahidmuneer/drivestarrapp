@@ -1,8 +1,12 @@
 import React from 'react';
+
+import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   StyleSheet,
+  AppRegistry,
   View,
   TouchableOpacity,
+  Linking,
   ImageBackground,
 } from 'react-native';
 
@@ -10,6 +14,7 @@ import { fonts, colors } from '../../styles';
 import { Text } from '../../components/StyledText';
 
 export default function HomeScreen({ isExtended, setIsExtended }) {
+  this.scanner=null;
   // const rnsUrl = 'https://reactnativestarter.com';
   // const handleClick = () => {
   //   Linking.canOpenURL(rnsUrl).then(supported => {
@@ -20,10 +25,31 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   //     }
   //   });
   // };
+  onSuccess = (e) => {
+    console.log("data"+e.data);
+    this.scanner.reactivate()
+    // Linking
+    //   .openURL(e.data)
+    //   .catch(err => console.error('An error occured', err));
+  }
 
   return (
     <View style={styles.container}>
-      <ImageBackground
+     <QRCodeScanner
+        onRead={this.onSuccess}
+        ref={(node) => { this.scanner = node }}
+        topContent={
+          <Text style={{backgroundColor:"white"}}>
+            Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+          </Text>
+        }
+        bottomContent={
+          <TouchableOpacity style={styles.buttonTouchable}>
+            <Text style={styles.buttonText}>OK. Got it!</Text>
+          </TouchableOpacity>
+        }
+      />
+        {/* <ImageBackground
         source={require('../../../assets/images/background.png')}
         style={styles.bgImage}
         resizeMode="cover"
@@ -67,12 +93,31 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
             </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
+      </ImageBackground> */}
+
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777',
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000',
+  },
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)',
+  },
+  buttonTouchable: {
+    padding: 16,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -119,3 +164,6 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.primary,
   },
 });
+
+
+AppRegistry.registerComponent('default', () => ScanScreen);
