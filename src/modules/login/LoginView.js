@@ -1,7 +1,7 @@
 import React from 'react';
 import * as axios from "axios";
-import { StyleSheet, View,Text,Alert, Button,TouchableOpacity,AsyncStorage } from 'react-native';
-import { Card,  Input,Image } from 'react-native-elements'
+import { StyleSheet, View,Text,Alert,TouchableOpacity,AsyncStorage } from 'react-native';
+import { Card,  Input,Image,Button } from 'react-native-elements'
 import { colors } from '../../styles';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -85,25 +85,22 @@ render() {
 />
 
 
-<TouchableOpacity style={styles.buttonContainer} 
-                     >
-
 <Button
  
   containerStyle={{marginTop:10}}
   onPress={this._signInAsync}
   title="Login"
 />
-                      
-
-</TouchableOpacity> 
+                     
 </Card>
     </View>
   );
 }
 
 _signInAsync = async () => {
-
+  if(this.state.error!=""){
+    return;
+  }
 //  let body =
 this.setState({
   loading:true
@@ -133,8 +130,6 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
  if(responseJson.status==200){
    AsyncStorage.setItem('userToken', responseJson.token_type+" "+responseJson.access_token);
   vm.props.navigation.navigate("App");
- 
-
 }
  else{
   vm.setState({

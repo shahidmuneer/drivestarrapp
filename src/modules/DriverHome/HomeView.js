@@ -1,5 +1,6 @@
 import React from 'react';
-
+import AsyncStorage from "react-native";
+import Toast, {DURATION} from 'react-native-easy-toast'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   StyleSheet,
@@ -26,26 +27,36 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   //   });
   // };
   onSuccess = (e) => {
-    console.log("data"+e.data);
-    this.scanner.reactivate()
-    // Linking
-    //   .openURL(e.data)
-    //   .catch(err => console.error('An error occured', err));
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': AsyncStorage.getItem("userToken")
+    }
+
+ 
+ let vm=this;
+      this.refs.toast.show('Scanned Successfull !', 300, () => {
+        axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/student/scan',{
+  token: e.data
+        },headers).then(function(responseJson){
+  console.log(responseJson);
+          });
+        vm.scanner.reactivate();
+    });
   }
 
   return (
     <View style={styles.container}>
+      <Toast ref="toast"/>
      <QRCodeScanner
         onRead={this.onSuccess}
         ref={(node) => { this.scanner = node }}
         topContent={
           <Text style={{backgroundColor:"white"}}>
-            Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
           </Text>
         }
         bottomContent={
           <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
+            <Text style={styles.buttonText}></Text>
           </TouchableOpacity>
         }
       />

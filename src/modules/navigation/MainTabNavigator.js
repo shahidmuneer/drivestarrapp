@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 
 import { colors, fonts } from '../../styles';
 
-import HomeScreen from '../home/HomeViewContainer';
+import HomeScreen from '../DriverHome/HomeViewContainer';
 import CalendarScreen from '../calendar/CalendarViewContainer';
 import GridsScreen from '../grids/GridsViewContainer';
 import PagesScreen from '../pages/PagesViewContainer';

@@ -27,15 +27,8 @@ const stackNavigator = createStackNavigator(
     Main: {
       screen: MainTabNavigator,
       navigationOptions: () => ({
-        title: 'React Native Starter',
+        title: 'Drivestarr',
         headerLeft: null,
-        headerBackground: (
-          <Image
-            style={{ flex: 1 }}
-            source={headerBackground}
-            resizeMode="cover"
-          />
-        ),
       }),
     },
     Profile: {
@@ -84,13 +77,13 @@ const stackNavigator = createStackNavigator(
         backgroundColor: colors.primary,
         borderBottomWidth: 0,
       },
-      headerBackground: (
-        <Image
-          style={{ flex: 1 }}
-          source={headerBackground}
-          resizeMode="cover"
-        />
-      ),
+      // headerBackground: (
+      //   <Image
+      //     style={{ flex: 1 }}
+      //     source={headerBackground}
+      //     resizeMode="cover"
+      //   />
+      // ),
       headerTitleStyle: {
         color: colors.white,
         fontFamily: fonts.primaryRegular,
