@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import AsyncStorage from "react-native";
 import Toast, {DURATION} from 'react-native-easy-toast'
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -16,6 +16,7 @@ import { Text } from '../../components/StyledText';
 
 export default function HomeScreen({ isExtended, setIsExtended }) {
   this.scanner=null;
+  const toast = useRef(null);
   // const rnsUrl = 'https://reactnativestarter.com';
   // const handleClick = () => {
   //   Linking.canOpenURL(rnsUrl).then(supported => {
@@ -30,11 +31,9 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': AsyncStorage.getItem("userToken")
-    }
-
- 
+    } 
  let vm=this;
-      this.refs.toast.show('Scanned Successfull !', 300, () => {
+      this.toast.show('Scanned Successfull !', 300, () => {
         axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/student/scan',{
   token: e.data
         },headers).then(function(responseJson){
@@ -46,7 +45,8 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
 
   return (
     <View style={styles.container}>
-      <Toast ref="toast"/>
+
+      <Toast ref={toast}/>
      <QRCodeScanner
         onRead={this.onSuccess}
         ref={(node) => { this.scanner = node }}
