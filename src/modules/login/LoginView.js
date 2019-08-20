@@ -4,7 +4,6 @@ import { StyleSheet, View,Text,Alert,TouchableOpacity,AsyncStorage } from 'react
 import { Card,  Input,Image,Button } from 'react-native-elements'
 import { colors } from '../../styles';
 import Spinner from 'react-native-loading-spinner-overlay';
-
 export default class SignInScreen extends React.Component {static navigationOptions =
    {
   title: 'Please sign in',
@@ -14,6 +13,7 @@ constructor(props){
   this.state= {passwordInput:"",emailInput:"",loading:false,error:""};
   this.handleEmailChange=this.handleEmailChange.bind(this);
   this.handlePasswordChange=this.handlePasswordChange.bind(this);
+ 
 }
 
 handleEmailChange(value){
@@ -91,6 +91,7 @@ render() {
   onPress={this._signInAsync}
   title="Login"
 />
+
                      
 </Card>
     </View>
@@ -128,7 +129,12 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
       loading:false
     });
  if(responseJson.status==200){
-   AsyncStorage.setItem('userToken', responseJson.token_type+" "+responseJson.access_token);
+  
+  // (async () => {
+    // vm.storeItem("userToken",responseJson.data.access_token);
+//     await AsyncStorage.setItem('userToken',responseJson.data.access_token);
+// })();
+   AsyncStorage.setItem('userToken',responseJson.data.token_type+" "+responseJson.data.access_token);
   vm.props.navigation.navigate("App");
 }
  else{
@@ -144,6 +150,16 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
 
 
 };
+ async storeItem(key, item){
+  try {
+      //we want to wait for the Promise returned by AsyncStorage.setItem()
+      //to be resolved to the actual value before returning the value
+      var jsonOfItem = await AsyncStorage.setItem(key,item);
+      return jsonOfItem;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 }
 
 

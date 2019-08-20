@@ -151,6 +151,7 @@ signingConfig signingConfigs.release
 }
 
 dependencies {
+    implementation project(':react-native-tts')
     // implementation project(':react-native-camera')
     compile (project(':react-native-camera')) {
   exclude group: "com.google.android.gms"

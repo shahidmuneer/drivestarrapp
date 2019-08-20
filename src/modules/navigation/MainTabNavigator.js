@@ -6,15 +6,17 @@ import { createBottomTabNavigator } from 'react-navigation';
 import { colors, fonts } from '../../styles';
 
 import HomeScreen from '../DriverHome/HomeViewContainer';
-import CalendarScreen from '../calendar/CalendarViewContainer';
-import GridsScreen from '../grids/GridsViewContainer';
-import PagesScreen from '../pages/PagesViewContainer';
+// import CalendarScreen from '../calendar/CalendarViewContainer';
+// import GridsScreen from '../grids/GridsViewContainer';
+// import PagesScreen from '../pages/PagesViewContainer';
 import ComponentsScreen from '../components/ComponentsViewContainer';
 
+import DriverScreen from '../driver/DriverViewContainer';
+
 const iconHome = require('../../../assets/images/tabbar/home.png');
-const iconCalendar = require('../../../assets/images/tabbar/calendar.png');
-const iconGrids = require('../../../assets/images/tabbar/grids.png');
-const iconPages = require('../../../assets/images/tabbar/pages.png');
+const iconProfile = require('../../../assets/images/pages/profile.png');
+// const iconGrids = require('../../../assets/images/tabbar/grids.png');
+// const iconPages = require('../../../assets/images/tabbar/pages.png');
 const iconComponents = require('../../../assets/images/tabbar/components.png');
 
 const hederBackground = require('../../../assets/images/topBarBg.png');
@@ -64,8 +66,8 @@ export default createBottomTabNavigator(
         header: null,
       },
     },
-    Calendar: {
-      screen: CalendarScreen,
+    Driver: {
+      screen: DriverScreen,
       navigationOptions: {
         header: (
           <View style={styles.headerContainer}>
@@ -75,28 +77,28 @@ export default createBottomTabNavigator(
         ),
       },
     },
-    Grids: {
-      screen: GridsScreen,
-      navigationOptions: {
-        header: (
-          <View style={styles.headerContainer}>
-            <Image style={styles.headerImage} source={hederBackground} />
-            <Text style={styles.headerCaption}>Grids</Text>
-          </View>
-        ),
-      },
-    },
-    Pages: {
-      screen: PagesScreen,
-      navigationOptions: {
-        header: (
-          <View style={styles.headerContainer}>
-            <Image style={styles.headerImage} source={hederBackground} />
-            <Text style={styles.headerCaption}>Pages</Text>
-          </View>
-        ),
-      },
-    },
+    // Grids: {
+    //   screen: GridsScreen,
+    //   navigationOptions: {
+    //     header: (
+    //       <View style={styles.headerContainer}>
+    //         <Image style={styles.headerImage} source={hederBackground} />
+    //         <Text style={styles.headerCaption}>Grids</Text>
+    //       </View>
+    //     ),
+    //   },
+    // },
+    // Pages: {
+    //   screen: PagesScreen,
+    //   navigationOptions: {
+    //     header: (
+    //       <View style={styles.headerContainer}>
+    //         <Image style={styles.headerImage} source={hederBackground} />
+    //         <Text style={styles.headerCaption}>Pages</Text>
+    //       </View>
+    //     ),
+    //   },
+    // },
     Components: {
       screen: ComponentsScreen,
       navigationOptions: {
@@ -119,15 +121,15 @@ export default createBottomTabNavigator(
           case 'Home':
             iconSource = iconHome;
             break;
-          case 'Calendar':
-            iconSource = iconCalendar;
+          case 'Driver':
+            iconSource = iconProfile;
             break;
-          case 'Grids':
-            iconSource = iconGrids;
-            break;
-          case 'Pages':
-            iconSource = iconPages;
-            break;
+          // case 'Grids':
+          //   iconSource = iconGrids;
+          //   break;
+          // case 'Pages':
+          //   iconSource = iconPages;
+          //   break;
           case 'Components':
             iconSource = iconComponents;
             break;

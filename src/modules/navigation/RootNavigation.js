@@ -4,9 +4,9 @@ import { createAppContainer,createSwitchNavigator, createStackNavigator } from '
 
 import MainTabNavigator from './MainTabNavigator';
 
-import GalleryScreen from '../gallery/GalleryViewContainer';
+// import GalleryScreen from '../gallery/GalleryViewContainer';
+import DriverScreen from '../driver/DriverViewContainer';
 import AuthScreen from "../auth/AuthViewContainer";
-
 import LoginScreen from '../login/LoginViewContainer';
 
 // To use this screens please see the full version at https://reactnativestarter.com
@@ -31,42 +31,42 @@ const stackNavigator = createStackNavigator(
         headerLeft: null,
       }),
     },
-    Profile: {
-      screen: AvailableInFullVersion,
+    Driver: {
+      screen: DriverScreen,
       navigationOptions: {
         header: null,
       },
     },
-    Gallery: {
-      screen: GalleryScreen,
-      navigationOptions: {
-        title: 'Gallery',
-      },
-    },
-    Article: {
-      screen: AvailableInFullVersion,
-      navigationOptions: {
-        header: null,
-      },
-    },
-    Chat: {
-      screen: AvailableInFullVersion,
-      navigationOptions: {
-        header: null,
-      },
-    },
-    Messages: {
-      screen: AvailableInFullVersion,
-      navigationOptions: {
-        header: null,
-      },
-    },
-    Charts: {
-      screen: AvailableInFullVersion,
-      navigationOptions: {
-        header: null,
-      },
-    },
+    // Gallery: {
+    //   screen: GalleryScreen,
+    //   navigationOptions: {
+    //     title: 'Gallery',
+    //   },
+    // },
+    // Article: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Chat: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Messages: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Charts: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
   },
   {
     defaultNavigationOptions: () => ({
@@ -108,7 +108,13 @@ const stackNavigator = createStackNavigator(
     }),
   },
 );
-const AuthStack = createStackNavigator({ SignIn: LoginScreen });
+const AuthStack = createStackNavigator({ SignIn: LoginScreen },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+});
 
 export default createAppContainer(
   createSwitchNavigator(
@@ -120,4 +126,5 @@ export default createAppContainer(
       {
     initialRouteName: 'AuthLoading',
       }
+      
       ));

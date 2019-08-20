@@ -1,6 +1,8 @@
 import React,{useRef} from 'react';
-import AsyncStorage from "react-native";
-import Toast, {DURATION} from 'react-native-easy-toast'
+import {AsyncStorage,Button} from "react-native";
+import Tts from 'react-native-tts';
+import * as axios from "axios";
+
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   StyleSheet,
@@ -13,10 +15,33 @@ import {
 
 import { fonts, colors } from '../../styles';
 import { Text } from '../../components/StyledText';
-
+import Toast from 'react-native-simple-toast';
 export default function HomeScreen({ isExtended, setIsExtended }) {
   this.scanner=null;
-  const toast = useRef(null);
+  this.state={accessCode:""}
+AsyncStorage.getItem("userToken").then(item => this.state.accessCode=item);
+
+    // getitem().then(response => {
+    //   // do stuff using response ..
+    //   console.log("logged "+response);
+    // });
+  
+  // _getStorageValue=async()=>{
+  //   var value = await AsyncStorage.getItem('userToken')
+  //   return value
+  // }
+  // console.log("logged "+ _getStorageValue().then)
+  // _getStorageValue.then((response)=>console.log("logged "+response));
+  async function getitem() {
+    try {
+      const retrievedItem = await AsyncStorage.getItem("userToken");
+      const item = JSON.parse(retrievedItem);
+      return Promise.resolve(item);
+    } catch (error) {
+      return Promise.reject(error)
+    }
+    // return; <-- don't need this!
+  }
   // const rnsUrl = 'https://reactnativestarter.com';
   // const handleClick = () => {
   //   Linking.canOpenURL(rnsUrl).then(supported => {
@@ -28,25 +53,52 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   //   });
   // };
   onSuccess = (e) => {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': AsyncStorage.getItem("userToken")
+    let headers = {
+      'Authorization': this.state.accessCode
     } 
  let vm=this;
-      this.toast.show('Scanned Successfull !', 300, () => {
-        axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/student/scan',{
-  token: e.data
-        },headers).then(function(responseJson){
-  console.log(responseJson);
-          });
-        vm.scanner.reactivate();
-    });
+ Tts.speak('Scan Successfull ');
+ Toast.show("Scan Successful !");
+  axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/student/scan',{
+    data: e.data,
+    attendance_type:"checkout"
+          },headers).then(function(responseJson){
+    console.log("logged "+responseJson);
+            }).catch(error => {
+              console.log("loggedError"+error);
+          });;
+ setTimeout(function(){
+          vm.scanner.reactivate();
+      }, 2000);
   }
 
+  // speak=()=>{ 
+    // console.log("logged "+this.state.accessCode);
+  // }
+//  const headers = {
+//   'Content-Type': 'application/json',
+//   'Authorization': AsyncStorage.getItem("userToken")
+// } 
+// let vm=this;
+//  axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/student/scan',{
+//   data: "",
+//   attendance_type:"checkout"
+//         },headers).then(function(responseJson){
+//   console.log(responseJson);
+//           });
+//         vm.scanner.reactivate();
+//   }
+ 
   return (
     <View style={styles.container}>
+    
 
-      <Toast ref={toast}/>
+{/* <Button
+ containerStyle={{marginTop:10}}
+ onPress={this.speak}
+ title="Speak"
+/>  */}
+
      <QRCodeScanner
         onRead={this.onSuccess}
         ref={(node) => { this.scanner = node }}
