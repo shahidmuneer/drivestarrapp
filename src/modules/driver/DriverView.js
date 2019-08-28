@@ -1,79 +1,114 @@
 import React from 'react';
-import { StyleSheet, View, Image, FlatList } from 'react-native';
-import Lightbox from 'react-native-lightbox';
+import { StyleSheet, View, Text, ScrollView, Picker } from 'react-native';
 
-import { colors } from '../../styles';
-import { GridRow } from '../../components';
+import Icon from 'react-native-vector-icons/Entypo';
+import { colors, fonts } from '../../styles';
 
-export default function DriverScreen(props) {
-  const _keyExtractor = item =>
-    item.id ? `${item.id}` : `${item[0] && item[0].id}`;
+import { Button, RadioGroup, Dropdown } from '../../components';
 
-  const _renderItem = ({ item, index }) => {
-    if (index === 0) {
-      return (
-        <Lightbox key={item[0].id}>
-          <Image style={styles.topImage} source={{ uri: item[0].link }} />
-        </Lightbox>
-      );
-    }
-
-    return (
-      <View key={item[0].id} style={styles.imagesRow}>
-        {item.map(singleItem => (
-          <View key={singleItem.id} style={styles.imageContainer}>
-            <Lightbox>
-              <Image style={styles.image} source={{ uri: singleItem.link }} />
-            </Lightbox>
-          </View>
-        ))}
-      </View>
-    );
-  };
-
-  let isFirstArticle = true;
-  const groupedData = GridRow.groupByRows(props.images, 3, () => {
-    if (isFirstArticle) {
-      isFirstArticle = false;
-      return 3;
-    }
-
-    return 1;
-  });
-
+export default function ComponentsScreen(props) {
   return (
-    <FlatList
+    <ScrollView
       style={styles.container}
-      onRefresh={props.refreshImages}
-      refreshing={props.images.length === 0 && props.isLoading}
-      data={groupedData}
-      keyExtractor={_keyExtractor}
-      renderItem={_renderItem}
-    />
+      contentContainerStyle={{ paddingBottom: 20 }}
+    >
+      <View style={styles.componentsSection}>
+        <Text style={styles.componentSectionHeader}>Your Current Bus is Bus1</Text>
+      </View>
+
+
+      <View style={styles.componentsSection}>
+        <Text style={styles.componentSectionHeader}>You bus2 is being used by driver John Smith, Kindly choose your bus</Text>
+        <Picker
+          selectedValue={this.state.language}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ language: lang })
+          }>
+          <Picker.Item label="Bus1" value="Bus3" />
+          <Picker.Item label="Bus3" value="Bus3" />
+        </Picker>
+        <View style={styles.demoButtonsContainer}>
+          <Button
+            style={styles.demoButton}
+            primary
+            caption="Apply"
+            onPress={() => { }}
+          />
+        </View>
+
+
+      </View>
+
+
+
+
+      <View style={styles.componentsSection}>
+        <Text style={styles.componentSectionHeader}>You can change your bus by selecting the new bus</Text>
+        <Picker
+          selectedValue={this.state.language}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ language: lang })
+          }>
+          <Picker.Item label="Bus2" value="Bus2" />
+          <Picker.Item label="Bus3" value="Bus3" />
+        </Picker>
+        <View style={styles.demoButtonsContainer}>
+          <Button
+            style={styles.demoButton}
+            primary
+            caption="Apply"
+            onPress={() => { }}
+          />
+        </View>
+      </View>
+
+
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
-  },
-  topImage: {
     flex: 1,
-    height: 200,
-    margin: 5,
+    backgroundColor: colors.bluish,
+    paddingHorizontal: 15,
+    paddingTop: 20,
+  },
+  componentsSection: {
+    backgroundColor: colors.white,
+    padding: 15,
+    paddingBottom: 20,
+    marginBottom: 20,
     borderRadius: 5,
   },
-  imagesRow: {
+  componentSectionHeader: {
+    fontFamily: fonts.primaryRegular,
+    color: '#686868',
+    fontSize: 20,
+    marginBottom: 20,
+  },
+  demoButtonsContainer: {
     flex: 1,
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  imageContainer: {
+  demoIconsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     flex: 1,
-    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginBottom: 20,
   },
-  image: {
-    flex: 1,
-    height: 100,
-    borderRadius: 5,
+  demoButton: {
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  demoItem: {
+    marginVertical: 15,
   },
 });
