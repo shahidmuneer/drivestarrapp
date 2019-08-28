@@ -18,8 +18,9 @@ import { Text } from '../../components/StyledText';
 import Toast from 'react-native-simple-toast';
 export default function HomeScreen({ isExtended, setIsExtended }) {
   this.scanner=null;
-  this.state={accessCode:""}
+  this.state={accessCode:"",bus_id:""}
 AsyncStorage.getItem("userToken").then(item => this.state.accessCode=item);
+AsyncStorage.getItem("bus").then(item => this.state.bus_id=item);
 
     // getitem().then(response => {
     //   // do stuff using response ..
@@ -54,26 +55,42 @@ AsyncStorage.getItem("userToken").then(item => this.state.accessCode=item);
   // };
   onSuccess = (e) => {
     let headers = {
-      'Authorization': this.state.accessCode
+      'Authorization': this.state.accessCode,
+      // "Content-Type":"application/x-www-form-urlencoded"
     } 
  let vm=this;
+//  console.log("logged "+e.data);
+//  console.log("logged "+this.state.accessCode);
  Tts.speak('Scan Successfull ');
  Toast.show("Scan Successful !");
   axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/student/scan',{
-    data: e.data,
-    attendance_type:"checkout"
-          },headers).then(function(responseJson){
-    console.log("logged "+responseJson);
+    myContent: e.data,
+    attendance_type:"checkout",
+    bus_id:this.state.bus_id
+          },{headers: headers}).then(function(responseJson){
+    console.log("logged content "+JSON.stringify(responseJson));
             }).catch(error => {
-              console.log("loggedError"+error);
-          });;
+              console.log("loggedError "+error);
+          });
  setTimeout(function(){
           vm.scanner.reactivate();
-      }, 2000);
+      }, 1000);
   }
 
-  // speak=()=>{ 
-    // console.log("logged "+this.state.accessCode);
+  // sendRequest=()=>{ 
+  //     let headers = {
+  //       'Authorization': this.state.accessCode,
+  //       // "Content-Type":"application/x-www-form-urlencoded"
+  //     } 
+  //   axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/student/scan',{
+  //   myContent: `{"type":"Bearer","data":"eyJpdiI6InF4Z1EzVWxSUmt3b3F6cWVvSGlNa1E9PSIsInZhbHVlIjoiTkJaUEk4ODJjeWFPMTN6UTFCMkREZz09IiwibWFjIjoiNDc4ZGZhYmEyOTkwYzFkMjdmZmY1MjE3YzAzNjFjYjA2NTE2OWVjOThmNDBlZGM4YjM1NDQ4NTM1MmYyNDU4ZCJ9"}`,
+  //   attendance_type:"checkout"
+  //         },{headers: headers}).then(function(responseJson){
+  //   console.log("logged content "+JSON.stringify(responseJson));
+  //           }).catch(error => {
+  //             console.log("loggedError "+error);
+  //         });;
+  //   // console.log("logged "+this.state.accessCode);
   // }
 //  const headers = {
 //   'Content-Type': 'application/json',
@@ -92,12 +109,11 @@ AsyncStorage.getItem("userToken").then(item => this.state.accessCode=item);
   return (
     <View style={styles.container}>
     
-
-{/* <Button
+ {/* <Button
  containerStyle={{marginTop:10}}
- onPress={this.speak}
- title="Speak"
-/>  */}
+ onPress={this.sendRequest}
+ title="Request"
+/>   */}
 
      <QRCodeScanner
         onRead={this.onSuccess}

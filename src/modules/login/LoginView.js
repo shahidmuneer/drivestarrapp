@@ -134,8 +134,11 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
     // vm.storeItem("userToken",responseJson.data.access_token);
 //     await AsyncStorage.setItem('userToken',responseJson.data.access_token);
 // })();
+// console.log("logged "+JSON.stringify(responseJson.data.bus));
    AsyncStorage.setItem('userToken',responseJson.data.token_type+" "+responseJson.data.access_token);
-  vm.props.navigation.navigate("App");
+   AsyncStorage.setItem('bus',responseJson.data.bus.toString());
+ 
+   vm.props.navigation.navigate("App");
 }
  else{
   vm.setState({
