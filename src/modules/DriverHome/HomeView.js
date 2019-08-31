@@ -2,7 +2,7 @@ import React,{useRef} from 'react';
 import {AsyncStorage,Button} from "react-native";
 import Tts from 'react-native-tts';
 import * as axios from "axios";
-
+import { withNavigationFocus } from "react-navigation";
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   StyleSheet,
@@ -43,6 +43,28 @@ AsyncStorage.getItem("bus").then(item => this.state.bus_id=item);
     }
     // return; <-- don't need this!
   }
+  renderCamera=()=>{
+    const isFocused = this.props.navigation.isFocused();
+    if (!isFocused) {
+        return null;
+    } else if (isFocused) {
+        return (
+          <QRCodeScanner
+          onRead={this.onSuccess}
+          ref={(node) => { this.scanner = node }}
+          topContent={
+            <Text style={{backgroundColor:"white"}}>
+            </Text>
+          }
+          bottomContent={
+            <TouchableOpacity style={styles.buttonTouchable}>
+              <Text style={styles.buttonText}></Text>
+            </TouchableOpacity>
+          }
+        />
+        )
+    }
+  }
   // const rnsUrl = 'https://reactnativestarter.com';
   // const handleClick = () => {
   //   Linking.canOpenURL(rnsUrl).then(supported => {
@@ -57,7 +79,7 @@ AsyncStorage.getItem("bus").then(item => this.state.bus_id=item);
     let headers = {
       'Authorization': this.state.accessCode,
       // "Content-Type":"application/x-www-form-urlencoded"
-    } 
+    }
  let vm=this;
 //  console.log("logged "+e.data);
 //  console.log("logged "+this.state.accessCode);
@@ -115,19 +137,7 @@ AsyncStorage.getItem("bus").then(item => this.state.bus_id=item);
  title="Request"
 />   */}
 
-     <QRCodeScanner
-        onRead={this.onSuccess}
-        ref={(node) => { this.scanner = node }}
-        topContent={
-          <Text style={{backgroundColor:"white"}}>
-          </Text>
-        }
-        bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}></Text>
-          </TouchableOpacity>
-        }
-      />
+     {this.renderCamera}
         {/* <ImageBackground
         source={require('../../../assets/images/background.png')}
         style={styles.bgImage}
@@ -246,3 +256,5 @@ const styles = StyleSheet.create({
 
 
 AppRegistry.registerComponent('default', () => ScanScreen);
+
+// export default withNavigationFocus(QrCodeCamera);

@@ -3,13 +3,12 @@ import React from 'react';
 import { View, ActivityIndicator, StyleSheet,AsyncStorage } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { colors } from './src/styles';
-
 import { store, persistor } from './src/redux/store';
-
 import AppView from './src/modules/AppViewContainer';
 
+
 export default function App() {
-  AsyncStorage.removeItem("userToken");  
+  // AsyncStorage.removeItem("userToken");  
   return (
     <Provider store={store}>
       <PersistGate

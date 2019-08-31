@@ -5,15 +5,14 @@ import { Card,  Input,Image,Button } from 'react-native-elements'
 import { colors } from '../../styles';
 import Spinner from 'react-native-loading-spinner-overlay';
 export default class SignInScreen extends React.Component {static navigationOptions =
-   {
+  {
   title: 'Please sign in',
-};
+  };
 constructor(props){
   super(props);
   this.state= {passwordInput:"",emailInput:"",loading:false,error:""};
   this.handleEmailChange=this.handleEmailChange.bind(this);
   this.handlePasswordChange=this.handlePasswordChange.bind(this);
- 
 }
 
 handleEmailChange(value){
@@ -129,16 +128,14 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
       loading:false
     });
  if(responseJson.status==200){
-  
-  // (async () => {
-    // vm.storeItem("userToken",responseJson.data.access_token);
-//     await AsyncStorage.setItem('userToken',responseJson.data.access_token);
-// })();
-// console.log("logged "+JSON.stringify(responseJson.data.bus));
+  if(responseJson.data.role=="Driver")
+  {
    AsyncStorage.setItem('userToken',responseJson.data.token_type+" "+responseJson.data.access_token);
    AsyncStorage.setItem('bus',responseJson.data.bus.toString());
- 
    vm.props.navigation.navigate("App");
+  }else if(responseJson.data.role=="Parents"){
+    vm.props.navigation.navigate("ParentsApp");
+  }
 }
  else{
   vm.setState({

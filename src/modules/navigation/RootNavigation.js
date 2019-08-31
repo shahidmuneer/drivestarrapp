@@ -4,8 +4,13 @@ import { createAppContainer,createSwitchNavigator, createStackNavigator } from '
 
 import MainTabNavigator from './MainTabNavigator';
 
+
+
+import ParentsTabNavigator from './ParentsTabNavigator';
+
 // import GalleryScreen from '../gallery/GalleryViewContainer';
 import DriverScreen from '../driver/DriverViewContainer';
+import ParentsScreen from '../parents/home/ParentsViewContainer';
 import AuthScreen from "../auth/AuthViewContainer";
 import LoginScreen from '../login/LoginViewContainer';
 
@@ -108,6 +113,96 @@ const stackNavigator = createStackNavigator(
     }),
   },
 );
+
+
+
+
+const parentsNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: ParentsTabNavigator,
+      navigationOptions: () => ({
+        title: 'Drivestarr',
+        headerLeft: null,
+      }),
+    },
+    Parents: {
+      screen: ParentsScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    // Gallery: {
+    //   screen: GalleryScreen,
+    //   navigationOptions: {
+    //     title: 'Gallery',
+    //   },
+    // },
+    // Article: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Chat: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Messages: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   },
+    // },
+    // Charts: {
+    //   screen: AvailableInFullVersion,
+    //   navigationOptions: {
+    //     header: null,
+    //   }
+    // },
+  },
+  {
+    defaultNavigationOptions: () => ({
+      titleStyle: {
+        fontFamily: fonts.primaryLight,
+      },
+      headerStyle: {
+        backgroundColor: colors.primary,
+        borderBottomWidth: 0,
+      },
+      // headerBackground: (
+      //   <Image
+      //     style={{ flex: 1 }}
+      //     source={headerBackground}
+      //     resizeMode="cover"
+      //   />
+      // ),
+      headerTitleStyle: {
+        color: colors.white,
+        fontFamily: fonts.primaryRegular,
+      },
+      headerTintColor: '#222222',
+      headerLeft: props => (
+        <TouchableOpacity
+          onPress={props.onPress}
+          style={{
+            paddingLeft: 25,
+          }}
+        >
+          <Image
+            source={require('../../../assets/images/icons/arrow-back.png')}
+            resizeMode="contain"
+            style={{
+              height: 20,
+            }}
+          />
+        </TouchableOpacity>
+      ),
+    }),
+  },
+)
 const AuthStack = createStackNavigator({ SignIn: LoginScreen },
   {
     headerMode: 'none',
@@ -120,6 +215,7 @@ export default createAppContainer(
   createSwitchNavigator(
     {
   App: stackNavigator,
+  ParentsApp:parentsNavigator,
   Auth:AuthStack,
   AuthLoading: AuthScreen
       },
