@@ -99,13 +99,13 @@ export default createBottomTabNavigator(
     //     ),
     //   },
     // },
-    Components: {
+    Menu: {
       screen: ComponentsScreen,
       navigationOptions: {
         header: (
           <View style={styles.headerContainer}>
             <Image style={styles.headerImage} source={hederBackground} />
-            <Text style={styles.headerCaption}>Components</Text>
+            <Text style={styles.headerCaption}>Menu</Text>
           </View>
         ),
       },
@@ -130,7 +130,7 @@ export default createBottomTabNavigator(
           // case 'Pages':
           //   iconSource = iconPages;
           //   break;
-          case 'Components':
+          case 'Menu':
             iconSource = iconComponents;
             break;
           default:

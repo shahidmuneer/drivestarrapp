@@ -20,7 +20,6 @@ export default function ComponentsScreen(props) {
       <View style={styles.componentsSection}>
         <Text style={styles.componentSectionHeader}>You bus2 is being used by driver John Smith, Kindly choose your bus</Text>
         <Picker
-          selectedValue={this.state.language}
           style={{ height: 50, width: 150 }}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ language: lang })
@@ -46,7 +45,6 @@ export default function ComponentsScreen(props) {
       <View style={styles.componentsSection}>
         <Text style={styles.componentSectionHeader}>You can change your bus by selecting the new bus</Text>
         <Picker
-          selectedValue={this.state.language}
           style={{ height: 50, width: 150 }}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ language: lang })
