@@ -10,6 +10,7 @@ type ActionType = {
 
 export const initialState: AppStateType = {
   isFirstOpen: true,
+  API_URL:"https://drivestarr.dsjkhanewal.com.pk/api/auth"
 };
 
 export const SET_FIRST_OPEN = 'AppState/SET_FIRST_OPEN';
@@ -22,7 +23,7 @@ export function setAppOpened(): ActionType {
 
 export default function AppStateReducer(
   state: AppStateType = initialState,
-  action: ActionType,
+  action: ActionType
 ): AppStateType {
   switch (action.type) {
     case SET_FIRST_OPEN:

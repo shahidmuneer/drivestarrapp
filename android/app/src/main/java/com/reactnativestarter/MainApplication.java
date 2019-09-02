@@ -1,7 +1,8 @@
 package com.reactnativestarter;
 
 import android.app.Application;
-
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package 
+ 
 import com.facebook.react.ReactApplication;
 import net.no_mad.tts.TextToSpeechPackage;
 import org.reactnative.camera.RNCameraPackage;
@@ -34,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNLocalizePackage(),
             new LinearGradientPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new ReactNativePushNotificationPackage()
       );
     }
 
@@ -42,6 +44,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected String getJSMainModuleName() {
       return "index";
     }
+
+
+
+   
   };
 
   @Override
@@ -54,4 +60,5 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+
 }

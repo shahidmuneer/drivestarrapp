@@ -101,7 +101,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.reactnativestarter"
+        applicationId "com.starterapplication"
+        // com.drivestarr
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -166,6 +167,9 @@ compile ("com.google.android.gms:play-services-vision:10.2.0") {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation "com.google.android.gms:play-services-gcm:17.0.0"
+   
 }
 
 // Run this once to be able to run the application with BUCK

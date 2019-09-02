@@ -19,9 +19,10 @@ import Toast from 'react-native-simple-toast';
 class HomeScreen  extends React.Component{
   constructor(props) {
     super(props);
-    this.state = { accessCode: "",scanner:null, bus_id: "" };
+    this.state = { accessCode: "",scanner:null, bus_id: "" ,type:"checkin",baseUrl:""};
     AsyncStorage.getItem("userToken").then(item => this.state.accessCode = item);
     AsyncStorage.getItem("bus").then(item => this.state.bus_id = item);
+    AsyncStorage.getItem("BASE_URL").then(item=>this.state.baseUrl=item);
   }
 
 
@@ -49,9 +50,9 @@ class HomeScreen  extends React.Component{
       //  console.log("logged "+this.state.accessCode);
       Tts.speak('Scan Successfull ');
       Toast.show("Scan Successful !");
-      axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/student/scan', {
+      axios.post(this.state.baseUrl+'student/scan', {
         myContent: e.data,
-        attendance_type: "checkout",
+        attendance_type: this.state.type,
         bus_id: this.state.bus_id
       }, { headers: headers }).then(function (responseJson) {
         console.log("logged content " + JSON.stringify(responseJson));
@@ -65,7 +66,27 @@ class HomeScreen  extends React.Component{
     render (){
     
     return <View style={styles.container}>
+     
+      <View style={{zIndex:0}} >
       {this.renderCamera()}
+      </View>
+      <View style={{position:"absolute",flex:1,flexDirection:"row"}}>
+   <View style={{width:"50%",height:100}}>
+      <Button title="Check In "
+      onPress={()=>{this.setState({type:"checkin"})}}
+        color={this.state.type=="checkin"?"#ebc634":"#3483eb"}
+      style={{borderRadius: 5,}}
+        hardwareAccelerated/>
+  </View> 
+  <View style={{width:"50%",height:100}}>
+        <Button title="Check Out "  
+      onPress={()=>{this.setState({type:"checkout"})}}
+      color={this.state.type=="checkout"?"#ebc634":"#3483eb"}
+        style={{borderRadius: 5,}}
+        hardwareAccelerated/>
+  </View>
+        </View>
+     
     </View>
     }
   
@@ -92,7 +113,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
   },
   bgImage: {
     flex: 1,

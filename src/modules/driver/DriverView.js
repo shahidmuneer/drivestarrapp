@@ -1,70 +1,183 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, Picker } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Picker,AsyncStorage ,
+  AppRegistry,} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import { colors, fonts } from '../../styles';
 
+import Spinner from 'react-native-loading-spinner-overlay';
 import { Button, RadioGroup, Dropdown } from '../../components';
+import axios from 'axios';
 
-export default function ComponentsScreen(props) {
-  return (
-    <ScrollView
+import { withNavigationFocus } from "react-navigation";
+ class DriverScreen extends React.Component{
+  constructor(props){
+    super(props);
+this.state={baseUrl:"",accessToken:"",data:[],loading:true,currentBus:""};
+let vm=this;
+let interval=setInterval(function() {
+  const isFocused = props.navigation.isFocused();
+  console.log("logged "+isFocused);
+if (!isFocused) {
+  clearInterval(interval);
+}
+    vm.updateBuses("","")
+}, 2000);
+}
+
+
+
+  componentWillMount () {
+    let vm=this;
+    AsyncStorage.getItem("BASE_URL").then(function(item){
+      vm.setState({baseUrl:item});
+      AsyncStorage.getItem("userToken").then(function(token){
+        vm.setState({accessToken:token});
+        vm.updateBuses(item,token);
+      })
+    });
+    
+
+    
+  }
+  updateBuses=(base_url="",token="")=>{
+if(base_url=="" && token==""){
+  base_url=this.state.baseUrl;
+  token=this.state.accessToken;
+}
+
+    let headers = {
+      'Authorization': token
+    };
+    let vm = this;
+    axios.post(base_url+'drivers/get-available-buses',{} ,
+    { headers: headers }
+    )
+    .then(function (responseJson) {
+      let current_bus="";
+      if(responseJson.data.currentBus!=null){
+        current_bus=responseJson.data.currentBus.route_name;
+      }
+      vm.setState({data:responseJson.data,loading:false,currentBus:current_bus});
+    })
+    .catch(error => {
+      this.setState({loading:false});
+        console.log("loggedError " + error);
+      });
+  }
+
+
+  engageBus=(bus_id)=>{
+    
+    this.setState({loading:true});
+    let base_url=this.state.baseUrl;
+    let token=this.state.accessToken;
+        let headers = {
+          'Authorization': token
+        };
+        let vm = this;
+        axios.post(base_url+'drivers/engage-bus',{
+          bus_id:bus_id
+        },
+        { headers: headers }
+        )
+        .then(function (responseJson) {
+          let current_bus="";
+          if(responseJson.data.currentBus!=null){
+            current_bus=responseJson.data.currentBus.route_name;
+          }
+          vm.setState({data:responseJson.data,loading:false,currentBus:current_bus});
+        })
+        .catch(error => {
+          this.setState({loading:false});
+            console.log("loggedError " + error);
+          }); 
+  }
+
+
+  
+disengageBus=()=>{
+    let base_url=this.state.baseUrl;
+    let token=this.state.accessToken;
+    this.setState({loading:true});
+        let headers = {
+          'Authorization': token
+        };
+        let vm = this;
+        axios.post(base_url+'drivers/disengage-bus',{},
+        { headers: headers }
+        )
+        .then(function (responseJson) {
+          vm.setState({data:responseJson.data,loading:false,currentBus:""});
+        })
+        .catch(error => {
+          this.setState({loading:false});
+            console.log("loggedError " + error);
+          }); 
+  }
+
+  renderBuses=()=>{
+    // console.log("logged "+JSON.stringify(this.state.data.data))
+    if(this.state.data.data!=undefined){
+      return this.state.data.data.map(bus=>{
+         return <View key={bus.id} style={styles.componentsSection}>
+            <Text style={styles.componentSectionHeader}>
+              {bus.route_name}
+            </Text>
+            <View style={styles.demoButtonsContainer}>
+              <Button
+                style={styles.demoButton}
+                primary
+                caption="Engage Bus"
+                onPress={() => {this.selectBus(bus.id)}}
+              />
+            </View>
+          </View>; 
+    })
+  }
+  }
+  renderCurrentBus(){
+if(this.state.currentBus!=""){
+    return <Text style={styles.componentSectionHeader}> 
+      Your Current Bus is {this.state.currentBus}
+      </Text>;
+}
+else{
+    return <Text style={styles.componentSectionHeader}> 
+    Your Stack is empty
+    </Text>;
+
+}
+
+  }
+
+  selectBus(bus_id){
+this.engageBus(bus_id);
+  }
+  render() {
+    return <ScrollView
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 20 }}
     >
-      <View style={styles.componentsSection}>
-        <Text style={styles.componentSectionHeader}>Your Current Bus is Bus1</Text>
-      </View>
+       <Spinner visible={this.state.loading} style={{color:"white"}}  
+      textContent={''}></Spinner>
 
+      <View style={styles.componentsTopSection}>
+        {this.renderCurrentBus()}
 
-      <View style={styles.componentsSection}>
-        <Text style={styles.componentSectionHeader}>You bus2 is being used by driver John Smith, Kindly choose your bus</Text>
-        <Picker
-          style={{ height: 50, width: 150 }}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ language: lang })
-          }>
-          <Picker.Item label="Bus1" value="Bus3" />
-          <Picker.Item label="Bus3" value="Bus3" />
-        </Picker>
         <View style={styles.demoButtonsContainer}>
-          <Button
-            style={styles.demoButton}
-            primary
-            caption="Apply"
-            onPress={() => { }}
-          />
+              <Button
+                style={styles.demoDisengageButton}
+                color="#f58142"
+                caption="Disengage Bus"
+                onPress={() => {this.disengageBus()}}
+              />
         </View>
-
-
+     
       </View>
-
-
-
-
-      <View style={styles.componentsSection}>
-        <Text style={styles.componentSectionHeader}>You can change your bus by selecting the new bus</Text>
-        <Picker
-          style={{ height: 50, width: 150 }}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ language: lang })
-          }>
-          <Picker.Item label="Bus2" value="Bus2" />
-          <Picker.Item label="Bus3" value="Bus3" />
-        </Picker>
-        <View style={styles.demoButtonsContainer}>
-          <Button
-            style={styles.demoButton}
-            primary
-            caption="Apply"
-            onPress={() => { }}
-          />
-        </View>
-      </View>
-
-
+      {this.renderBuses()}
     </ScrollView>
-  );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -76,6 +189,13 @@ const styles = StyleSheet.create({
   },
   componentsSection: {
     backgroundColor: colors.white,
+    padding: 15,
+    paddingBottom: 20,
+    marginBottom: 20,
+    borderRadius: 5,
+  },
+  componentsTopSection:{
+    backgroundColor: "#e0f542",
     padding: 15,
     paddingBottom: 20,
     marginBottom: 20,
@@ -94,6 +214,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  disengageContainer:{
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  backgroundColor:"#e0f542"},
   demoIconsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -106,7 +233,17 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
+  demoDisengageButton:{
+    marginTop: 8,
+    marginBottom: 8,
+    backgroundColor:"#f58142"
+  },
   demoItem: {
     marginVertical: 15,
   },
 });
+
+AppRegistry.registerComponent('default', () => DriverScreen);
+
+export default withNavigationFocus(DriverScreen);
+

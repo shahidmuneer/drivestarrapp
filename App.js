@@ -8,7 +8,8 @@ import AppView from './src/modules/AppViewContainer';
 
 
 export default function App() {
-  // AsyncStorage.removeItem("userToken");  
+  // AsyncStorage.removeItem("userToken");
+  AsyncStorage.setItem("BASE_URL","http://drivestarr.dsjkhanewal.com.pk/api/auth/");  
   return (
     <Provider store={store}>
       <PersistGate

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
-    borderBottomColor: 'gray',
+    borderBottomColor: '#d6d6d6',
     borderBottomWidth: 0.5,
   },
 })
