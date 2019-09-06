@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "341160992432",
+      "firebase_url": "https://drivestarr.firebaseio.com",
+      "project_id": "drivestarr",
+      "storage_bucket": "drivestarr.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:341160992432:android:0df643e13c3437d3",
+          "android_client_info": {
+            "package_name": "com.drivestarr"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "341160992432-1da7n5ifi68s2p2lp97f01gq92oligfa.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBirnM2LUutaIALjb4UXQL1MeBeYZwvxuI"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "341160992432-1da7n5ifi68s2p2lp97f01gq92oligfa.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

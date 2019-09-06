@@ -74,6 +74,7 @@
 		C7E4DFACBDE4453783D0840D /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE34DB145B446E7806EFFBE /* libReactNativePermissions.a */; };
 		F8A207D329BF46CE9DDBB5D3 /* libTextToSpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7505807588C24AC085641D39 /* libTextToSpeech.a */; };
 		B8C7AE2165C2459E8CAA5C0F /* libRNCPushNotificationIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E18913347A14A4F966002B9 /* libRNCPushNotificationIOS.a */; };
+		5BBCB4F87E4C4B35AA4C7358 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B42BA957F9C4EE3B4783CC3 /* libRNFirebase.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -425,6 +426,8 @@
 		7505807588C24AC085641D39 /* libTextToSpeech.a */ = {isa = PBXFileReference; name = "libTextToSpeech.a"; path = "libTextToSpeech.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		D759104950364F2389886C2E /* PushNotificationIOS.xcodeproj */ = {isa = PBXFileReference; name = "PushNotificationIOS.xcodeproj"; path = "../node_modules/@react-native-community/push-notification-ios/ios/PushNotificationIOS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9E18913347A14A4F966002B9 /* libRNCPushNotificationIOS.a */ = {isa = PBXFileReference; name = "libRNCPushNotificationIOS.a"; path = "libRNCPushNotificationIOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E3FB74E350734209B679324E /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; name = "RNFirebase.xcodeproj"; path = "../../../../Users/FA15BSSE026.vcomsats/AppData/Roaming/npm/node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3B42BA957F9C4EE3B4783CC3 /* libRNFirebase.a */ = {isa = PBXFileReference; name = "libRNFirebase.a"; path = "libRNFirebase.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,7 @@
 				C7E4DFACBDE4453783D0840D /* libReactNativePermissions.a in Frameworks */,
 				F8A207D329BF46CE9DDBB5D3 /* libTextToSpeech.a in Frameworks */,
 				B8C7AE2165C2459E8CAA5C0F /* libRNCPushNotificationIOS.a in Frameworks */,
+				5BBCB4F87E4C4B35AA4C7358 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +666,7 @@
 				2CB9372C742441B8A61AB368 /* ReactNativePermissions.xcodeproj */,
 				C0E5F72A409348B6AA99054A /* TextToSpeech.xcodeproj */,
 				D759104950364F2389886C2E /* PushNotificationIOS.xcodeproj */,
+				E3FB74E350734209B679324E /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1357,6 +1362,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1369,6 +1375,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Debug;
@@ -1401,6 +1408,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1413,6 +1421,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Release;
@@ -1444,6 +1453,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Debug;
@@ -1474,6 +1484,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Release;
@@ -1514,6 +1525,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1526,6 +1538,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Debug;
@@ -1566,6 +1579,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1578,6 +1592,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Release;
@@ -1617,6 +1632,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1629,6 +1645,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Debug;
@@ -1668,6 +1685,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1680,6 +1698,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
 					"$(SRCROOT)\..\node_modules\@react-native-community\push-notification-ios\ios",
+					"$(SRCROOT)\..\..\..\..\Users\FA15BSSE026.vcomsats\AppData\Roaming\npm\node_modules\react-native-firebase\ios\RNFirebase/**",
 				);
 			};
 			name = Release;

@@ -1,5 +1,4 @@
-package com.reactnativestarter;
-import org.reactnative.camera.RNCameraPackage;
+package com.drivestarr;
 import com.facebook.react.ReactActivity;
  import com.facebook.react.ReactActivityDelegate;
  import com.facebook.react.ReactRootView;
@@ -12,7 +11,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "ReactNativeStarter";
+        return "drivestarr";
     }
     @Override
   protected ReactActivityDelegate createReactActivityDelegate() {

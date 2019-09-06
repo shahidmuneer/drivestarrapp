@@ -1,9 +1,13 @@
-package com.reactnativestarter;
+package com.drivestarr;
 
 import android.app.Application;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package 
+// import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package 
  
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+
 import net.no_mad.tts.TextToSpeechPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -20,6 +24,8 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
+
+
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -30,13 +36,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new TextToSpeechPackage(),
             new RNCameraPackage(),
             new VectorIconsPackage(),
             new RNLocalizePackage(),
             new LinearGradientPackage(),
             new RNGestureHandlerPackage(),
-            new ReactNativePushNotificationPackage()
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage()
       );
     }
 

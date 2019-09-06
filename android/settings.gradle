@@ -1,4 +1,6 @@
-rootProject.name = 'ReactNativeStarter'
+rootProject.name = 'drivestarr'
+include ':react-native-firebase'
+project(':react-native-firebase').projectDir = new File(rootProject.projectDir, '../../../../Users/FA15BSSE026.vcomsats/AppData/Roaming/npm/node_modules/react-native-firebase/android')
 include ':react-native-tts'
 project(':react-native-tts').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-tts/android')
 include ':react-native-camera'
