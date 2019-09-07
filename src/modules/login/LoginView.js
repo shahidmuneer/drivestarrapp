@@ -128,10 +128,11 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
       loading:false
     });
  if(responseJson.status==200){
+  AsyncStorage.setItem('userToken',responseJson.data.token_type+" "+responseJson.data.access_token);
+  AsyncStorage.setItem('userType',responseJson.data.role);
   if(responseJson.data.role=="Driver")
   {
-   AsyncStorage.setItem('userToken',responseJson.data.token_type+" "+responseJson.data.access_token);
-   AsyncStorage.setItem('bus',responseJson.data.bus.toString());
+    AsyncStorage.setItem('bus',responseJson.data.bus.toString());
    vm.props.navigation.navigate("App");
   }else if(responseJson.data.role=="Parents"){
     vm.props.navigation.navigate("ParentsApp");

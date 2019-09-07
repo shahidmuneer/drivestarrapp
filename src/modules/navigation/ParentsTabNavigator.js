@@ -66,17 +66,17 @@ export default createBottomTabNavigator(
         header: null,
       },
     },
-    Parents: {
-      screen: ParentsScreen,
-      navigationOptions: {
-        header: (
-          <View style={styles.headerContainer}>
-            <Image style={styles.headerImage} source={hederBackground} />
-            <Text style={styles.headerCaption}>Calendar</Text>
-          </View>
-        ),
-      },
-    },
+    // Parents: {
+    //   screen: ParentsScreen,
+    //   navigationOptions: {
+    //     header: (
+    //       <View style={styles.headerContainer}>
+    //         <Image style={styles.headerImage} source={hederBackground} />
+    //         <Text style={styles.headerCaption}>Calendar</Text>
+    //       </View>
+    //     ),
+    //   },
+    // },
     // Grids: {
     //   screen: GridsScreen,
     //   navigationOptions: {
@@ -121,9 +121,9 @@ export default createBottomTabNavigator(
           case 'Home':
             iconSource = iconHome;
             break;
-          case 'Parents':
-            iconSource = iconProfile;
-            break;
+          // case 'Parents':
+          //   iconSource = iconProfile;
+          //   break;
           // case 'Grids':
           //   iconSource = iconGrids;
           //   break;
