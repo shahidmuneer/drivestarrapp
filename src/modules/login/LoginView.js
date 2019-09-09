@@ -38,14 +38,8 @@ this.state.emailInput=value;
 
 
 handlePasswordChange(value){
-  if(value==""){
-    this.setState({
-      error:"Password Cannot be Empty"
-    });
-  }
-  else{
-    this.setState({passwordInput:value});
-  }
+
+    this.state.passwordInput=value;
   
   }
 
@@ -112,6 +106,10 @@ _signInAsync = async () => {
   if(this.state.error!=""){
     return;
   }
+  if(this.state.passwordInput==""){
+    return;
+  }
+
 //  let body =
 this.setState({
   loading:true
@@ -127,9 +125,7 @@ let vm=this;
 // }) 
 // .then((response) => response.json())
 // .then(function(responseJson){
-  if(this.state.passwordInput==""){
-    return;
-  }
+ 
 
 await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
         email: this.state.emailInput,
