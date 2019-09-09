@@ -1,17 +1,22 @@
 import React from 'react';
 
 import {
-  ActivityIndicator,
   AsyncStorage,
   StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
+
+import {Image} from "react-native-elements";
+import { colors } from '../../styles';
+import * as Animatable from 'react-native-animatable';
+// const StyledImage = Animatable.createAnimatableComponent(styled.Image);
 export default class AuthLoading extends React.Component {
     constructor(props) {
       super(props);
       this._bootstrapAsync();
     }
+    
   
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
@@ -29,8 +34,15 @@ export default class AuthLoading extends React.Component {
     // Render any loading content that you like here
     render() {
       return (
-        <View>
-          <ActivityIndicator />
+        <View style={{backgroundColor:colors.yellow ,flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+
+          <Animatable.Image
+  source={require('../../../assets/images/loader.png')}
+  style={{ width: 100, height: 100,resizeMode:'contain' }}
+  animation="rotate" iterationCount="infinite"
+  />
           <StatusBar barStyle="default" />
         </View>
       );

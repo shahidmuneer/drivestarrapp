@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View, Alert, ScrollView, AsyncStorage } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
+import Spinner from 'react-native-loading-spinner-overlay';
 import { colors,fonts } from '../../../styles';
 import { GridRow } from '../../../components';
 import * as axios from "axios";
@@ -222,6 +223,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 20,
     borderRadius: 5,
+
   },
   componentsSection2: {
     backgroundColor: colors.yellow,
@@ -229,10 +231,11 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 20,
     borderRadius: 5,
+    color:colors.white
   },
   componentSectionHeader: {
     fontFamily: fonts.primaryRegular,
-    color: '#686868',
+    color: 'white',
     fontSize: 20,
     marginBottom: 20,
   },

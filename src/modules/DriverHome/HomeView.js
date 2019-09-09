@@ -35,7 +35,7 @@ class HomeScreen  extends React.Component{
       else if (isFocused) {
         return <QRCodeScanner onRead={this.onSuccess} 
           ref={(node) =>  this.state.scanner= node }
-         topContent={<Text style={{ backgroundColor: "white" }}>
+         topContent={<Text style={{ backgroundColor: colors.white }}>
         </Text>} bottomContent={<TouchableOpacity style={styles.buttonTouchable}>
           <Text style={styles.buttonText}></Text>
         </TouchableOpacity>} />
@@ -74,14 +74,14 @@ class HomeScreen  extends React.Component{
    <View style={{width:"50%",height:100}}>
       <Button title="Check In "
       onPress={()=>{this.setState({type:"checkin"})}}
-        color={this.state.type=="checkin"?"#ebc634":"#3483eb"}
+        color={this.state.type=="checkin"?colors.black:colors.yellow}
       style={{borderRadius: 5,}}
         hardwareAccelerated/>
   </View> 
   <View style={{width:"50%",height:100}}>
         <Button title="Check Out "  
       onPress={()=>{this.setState({type:"checkout"})}}
-      color={this.state.type=="checkout"?"#ebc634":"#3483eb"}
+      color={this.state.type=="checkout"?colors.black:colors.yellow}
         style={{borderRadius: 5,}}
         hardwareAccelerated/>
   </View>

@@ -24,6 +24,7 @@ import LoginScreen from '../login/LoginViewContainer';
 import AvailableInFullVersion from '../availableInFullVersion/AvailableInFullVersionViewContainer';
 
 import { colors, fonts } from '../../styles';
+import ComponentsScreen from '../components/ComponentsView';
 
 const headerBackground = require('../../../assets/images/topBarBg.png');
 
@@ -32,22 +33,21 @@ const stackNavigator = createStackNavigator(
     Main: {
       screen: MainTabNavigator,
       navigationOptions: () => ({
-        title: 'Drivestarr',
-        headerLeft: null,
+        title: 'Home'
       }),
     },
     Driver: {
       screen: DriverScreen,
       navigationOptions: {
-        header: null,
+        title:"Choose Driver"
       },
     },
-    // Gallery: {
-    //   screen: GalleryScreen,
-    //   navigationOptions: {
-    //     title: 'Gallery',
-    //   },
-    // },
+    component: {
+      screen: ComponentsScreen,
+      navigationOptions: {
+        title: 'Menu',
+      },
+    },
     // Article: {
     //   screen: AvailableInFullVersion,
     //   navigationOptions: {
@@ -79,8 +79,14 @@ const stackNavigator = createStackNavigator(
         fontFamily: fonts.primaryLight,
       },
       headerStyle: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.yellow,
         borderBottomWidth: 0,
+      },
+      component: {
+        screen: ComponentsScreen,
+        navigationOptions: {
+          title: 'Menu',
+        },
       },
       // headerBackground: (
       //   <Image
@@ -122,16 +128,22 @@ const parentsNavigator = createStackNavigator(
     Main: {
       screen: ParentsTabNavigator,
       navigationOptions: () => ({
-        title: 'Drivestarr',
-        headerLeft: null,
+        title: 'Home',
       }),
     },
     Parents: {
       screen: ParentsScreen,
       navigationOptions: {
-        header: null,
+        title:"Home",
       },
     },
+    component: {
+      screen: ComponentsScreen,
+      navigationOptions: {
+        title:"Menu",
+      },
+    },
+
     // Gallery: {
     //   screen: GalleryScreen,
     //   navigationOptions: {
@@ -169,7 +181,7 @@ const parentsNavigator = createStackNavigator(
         fontFamily: fonts.primaryLight,
       },
       headerStyle: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.yellow,
         borderBottomWidth: 0,
       },
       // headerBackground: (

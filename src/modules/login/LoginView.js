@@ -1,16 +1,17 @@
 import React from 'react';
 import * as axios from "axios";
-import { StyleSheet, View,Text,Alert,TouchableOpacity,AsyncStorage } from 'react-native';
-import { Card,  Input,Image,Button } from 'react-native-elements'
+import { StyleSheet, View,Text,Alert,AsyncStorage,Button } from 'react-native';
+import { Card,  Input,Image } from 'react-native-elements'
 import { colors } from '../../styles';
 import Spinner from 'react-native-loading-spinner-overlay';
+import * as Animatable from 'react-native-animatable';
 export default class SignInScreen extends React.Component {static navigationOptions =
   {
   title: 'Please sign in',
   };
 constructor(props){
   super(props);
-  this.state= {passwordInput:"",emailInput:"",loading:false,error:""};
+  this.state= {passwordInput:"",emailInput:"",loading:false,error:"All fields are required"};
   this.handleEmailChange=this.handleEmailChange.bind(this);
   this.handlePasswordChange=this.handlePasswordChange.bind(this);
 }
@@ -24,7 +25,7 @@ handleEmailChange(value){
   }
   else if(value==""){
     this.setState({
-      error:""
+      error:"Email is required"
     });
   }
   else{
@@ -37,7 +38,15 @@ this.state.emailInput=value;
 
 
 handlePasswordChange(value){
-  this.state.passwordInput=value;
+  if(value==""){
+    this.setState({
+      error:"Password Cannot be Empty"
+    });
+  }
+  else{
+    this.statState({passwordInput:value});
+  }
+  
   }
 
 
@@ -49,14 +58,14 @@ render() {
 
             <View style={{ width:"100%",marginTop:-120,justifyContent: 'center',
     alignItems: 'center'}}>
-                <Image
+                <Animatable.Image animation="bounceInDown" 
   source={require('../../../assets/images/icon2.png')}
   style={{ width: 150, height: 150,resizeMode:'contain' }}
   />
   </View>
   {/* title="Login Form" */}
       <Card
-      containerStyle={{padding: 5,marginTop:10,width:"90%"}}>
+      containerStyle={{padding: 5,marginTop:10,width:"90%",backgroundColor:colors.yellow}}>
      
         <Text style={{color:'red',paddingLeft:20}}>{this.state.error}</Text>
         <Input
@@ -85,10 +94,10 @@ render() {
 
 
 <Button
- 
-  containerStyle={{marginTop:10}}
+  style={{marginTop:15}}
   onPress={this._signInAsync}
   title="Login"
+  color={colors.black}
 />
 
                      
@@ -119,6 +128,9 @@ let vm=this;
 // }) 
 // .then((response) => response.json())
 // .then(function(responseJson){
+  if(this.state.passwordInput==""){
+    return;
+  }
 
 await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
         email: this.state.emailInput,
@@ -166,7 +178,7 @@ await axios.post('https://www.drivestarr.dsjkhanewal.com.pk/api/auth/login',{
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.yellow,
     flex: 1,
     height: '100%',
     left: 0,

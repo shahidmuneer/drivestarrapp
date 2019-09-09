@@ -47,6 +47,7 @@
 import React from 'react';
 import { StyleSheet, View,TouchableHighlight,  FlatList, Text ,AsyncStorage} from 'react-native';
 import { List, ListItem } from 'react-native-elements'
+const logoutImage = require('../../../assets/images/icons/logout.png');
 
 import {
   AppRegistry
@@ -56,7 +57,10 @@ export default function ComponentsScreen(props)  {
   renderList=({item})=>{
      return <TouchableHighlight 
      onPress={() => this.callFunction(item.function)}>
-     <ListItem style={styles.item} title={item.key} />
+
+     <ListItem style={styles.item} title={item.key} 
+     leftAvatar={{ source: item.image }}
+     />
      </TouchableHighlight>
   }
   logout=()=>{
@@ -82,7 +86,7 @@ export default function ComponentsScreen(props)  {
    <View>
 <FlatList
           data={[
-            {key: 'Logout',function:"logout"}
+            {key: 'Logout',function:"logout",image:logoutImage}
           ]}
           renderItem={this.renderList}
         />
@@ -98,7 +102,6 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     fontSize: 18,
-    height: 44,
     borderBottomColor: '#d6d6d6',
     borderBottomWidth: 0.5,
   },

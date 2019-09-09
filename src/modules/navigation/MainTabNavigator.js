@@ -33,15 +33,17 @@ const styles = StyleSheet.create({
   tabBarIcon: {
     width: 23,
     height: 23,
+    tintColor: colors.white,
   },
   tabBarIconFocused: {
-    tintColor: colors.primary,
+    tintColor: colors.black,
   },
   headerContainer: {
     height: 70,
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: 10,
+    backgroundColor:colors.yellow
   },
   headerImage: {
     position: 'absolute',
@@ -72,7 +74,7 @@ export default createBottomTabNavigator(
         header: (
           <View style={styles.headerContainer}>
             <Image style={styles.headerImage} source={hederBackground} />
-            <Text style={styles.headerCaption}>Calendar</Text>
+            <Text style={styles.headerCaption}>Driver</Text>
           </View>
         ),
       },
@@ -153,12 +155,12 @@ export default createBottomTabNavigator(
     tabBarOptions: {
       showLabel: true,
       style: {
-        backgroundColor: colors.white,
+        backgroundColor: colors.yellow,
         borderTopWidth: 0.5,
         borderTopColor: '#d6d6d6',
       },
       labelStyle: {
-        color: colors.grey,
+        color: colors.white,
       },
     },
   },
