@@ -1,6 +1,6 @@
 import React from 'react';
 import * as axios from "axios";
-import { StyleSheet, View,Text,Alert,AsyncStorage,Button } from 'react-native';
+import { StyleSheet, View,Text,Alert,AsyncStorage,Button,TouchableOpacity } from 'react-native';
 import { Card,  Input,Image } from 'react-native-elements'
 import { colors } from '../../styles';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -44,7 +44,7 @@ handlePasswordChange(value){
     });
   }
   else{
-    this.statState({passwordInput:value});
+    this.setState({passwordInput:value});
   }
   
   }
@@ -92,13 +92,15 @@ render() {
               secureTextEntry
 />
 
-
+<TouchableOpacity
+style={{marginTop:15}}>
 <Button
-  style={{marginTop:15}}
+  
   onPress={this._signInAsync}
   title="Login"
   color={colors.black}
 />
+</TouchableOpacity>
 
                      
 </Card>
@@ -121,10 +123,7 @@ let vm=this;
 //     Accept: 'application/json',
 //     'Content-Type': 'application/json',
 //   },
-//   body:JSON.stringify({
-//     email: this.state.emailInput,
-//     password: this.state.passwordInput,
-//   })
+
 // }) 
 // .then((response) => response.json())
 // .then(function(responseJson){
