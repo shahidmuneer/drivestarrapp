@@ -33,19 +33,22 @@ const stackNavigator = createStackNavigator(
     Main: {
       screen: MainTabNavigator,
       navigationOptions: () => ({
-        title: 'Home'
+        title: 'Home',
+        headerLeft:null
       }),
     },
     Driver: {
       screen: DriverScreen,
       navigationOptions: {
-        title:"Choose Driver"
+        title:"Choose Driver",
+        headerLeft:null
       },
     },
     component: {
       screen: ComponentsScreen,
       navigationOptions: {
         title: 'Menu',
+        headerLeft:null
       },
     },
     // Article: {
@@ -77,6 +80,7 @@ const stackNavigator = createStackNavigator(
     defaultNavigationOptions: () => ({
       titleStyle: {
         fontFamily: fonts.primaryLight,
+
       },
       headerStyle: {
         backgroundColor: colors.yellow,
@@ -129,18 +133,21 @@ const parentsNavigator = createStackNavigator(
       screen: ParentsTabNavigator,
       navigationOptions: () => ({
         title: 'Home',
+        headerLeft:null
       }),
     },
     Parents: {
       screen: ParentsScreen,
       navigationOptions: {
         title:"Home",
+        headerLeft:null
       },
     },
     component: {
       screen: ComponentsScreen,
       navigationOptions: {
         title:"Menu",
+        headerLeft:null
       },
     },
 
