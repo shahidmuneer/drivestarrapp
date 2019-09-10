@@ -55,12 +55,12 @@ class HomeScreen  extends React.Component{
         attendance_type: this.state.type,
         bus_id: this.state.bus_id
       }, { headers: headers }).then(function (responseJson) {
-        console.log("logged content " + JSON.stringify(responseJson));
+        // console.log("logged content " + JSON.stringify(responseJson));
       }).catch(error => {
         console.log("loggedError " + error);
       });
       setTimeout(function () {
-        vm.scanner.reactivate();
+        vm.state.scanner.reactivate();
       }, 1000);
     };
     render (){

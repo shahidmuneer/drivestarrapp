@@ -54,12 +54,12 @@ render() {
     alignItems: 'center'}}>
                 <Animatable.Image animation="bounceInDown" 
   source={require('../../../assets/images/icon2.png')}
-  style={{ width: 150, height: 150,resizeMode:'contain' }}
+  style={{ width: 250, height: 250,resizeMode:'contain' }}
   />
   </View>
   {/* title="Login Form" */}
       <Card
-      containerStyle={{padding: 5,marginTop:10,width:"90%",backgroundColor:colors.yellow}}>
+      containerStyle={{padding: 5,borderColor:colors.yellow,marginTop:10,width:"90%",backgroundColor:colors.yellow}}>
      
         <Text style={{color:'red',paddingLeft:20}}>{this.state.error}</Text>
         <Input

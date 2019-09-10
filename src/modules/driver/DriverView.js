@@ -175,6 +175,7 @@ this.engageBus(bus_id);
         </View>
      
       </View>
+
       {this.renderBuses()}
     </ScrollView>
   }

@@ -21,7 +21,7 @@ export default class AuthLoading extends React.Component {
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
       const userToken = await AsyncStorage.getItem('userToken');
-      const type = await AsyncStorage.getItem('userToken');
+      const type = await AsyncStorage.getItem('userType');
       if(type=="Driver"){
         this.props.navigation.navigate(userToken ? 'App' : 'Auth');
       }else{

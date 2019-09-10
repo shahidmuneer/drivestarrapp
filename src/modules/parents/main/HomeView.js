@@ -169,7 +169,10 @@ export default class HomeScreen extends React.Component{
     }
   }
     render(){
-      return <View>
+      return <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 20 }}>
+        
          <Spinner visible={this.state.loading} style={{color:"white"}}  
       textContent={''}></Spinner>
 
@@ -202,12 +205,9 @@ export default class HomeScreen extends React.Component{
           }}
        />
        </View>
-        <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ paddingBottom: 20 }}>
+       
       {this.renderList()}
         </ScrollView>
-    </View>
     }
 }
 
