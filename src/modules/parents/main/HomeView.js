@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component{
       'Authorization': accessCode
     };
     // console.log("logged baseUrl="+baseUrl+" accessCode = "+accessCode)
-    await axios.post(baseUrl+'register-notification', 
+    await axios.post(baseUrl+'reg-notification', 
     {
       device_token: fcmToken
     }, { headers: headers }).then(function (responseJson) {
